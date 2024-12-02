@@ -1,5 +1,5 @@
 variable "project_id" {
-  default = "i-multiplexer-435108-d2"
+  default = "your_project_id"
 }
 
 variable "region" {
