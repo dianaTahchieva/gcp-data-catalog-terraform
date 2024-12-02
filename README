@@ -71,8 +71,7 @@ project_id: Your GCP project ID where resources will be created.
 region: The GCP region where your resources will be created (e.g., us-central1).
 For example:
 
-hcl
-Code kopieren
+
 variable "project_id" {
   default = "your-gcp-project-id"
 }
@@ -80,52 +79,57 @@ variable "project_id" {
 variable "region" {
   default = "us-central1"
 }
+
+
 You can also configure these variables directly in your terminal by running the terraform apply command and following the prompts.
 
 5. Apply Terraform Plan
 Once you've set up your configuration, apply the Terraform plan:
 
-bash
-Code kopieren
+
 terraform apply
+
+
 Review the proposed changes and confirm by typing yes when prompted. Terraform will then create the BigQuery dataset, tables, and Data Catalog taxonomy, as well as the necessary service accounts and IAM roles.
 
 Project Structure
 The project is organized as follows:
 
-bash
-Code kopieren
+
 gcp-data-catalog-terraform/
-├── main.tf            # Main Terraform configuration file
 ├── variables.tf       # Terraform variables file
 ├── outputs.tf         # Outputs from Terraform (e.g., dataset, table IDs)
 ├── bigquery.tf        # BigQuery dataset and table creation
 ├── datacatalog.tf     # Data Catalog taxonomy and policy tags creation
 └── iam.tf             # Service account and IAM roles configuration
-main.tf: The main Terraform file that includes the provider configuration.
+
+
 variables.tf: Defines the variables that can be customized by the user (e.g., project ID, region).
 outputs.tf: Outputs the IDs of created resources like BigQuery dataset and table.
 bigquery.tf: Contains the Terraform resources for creating BigQuery datasets and tables.
 datacatalog.tf: Defines resources for Google Cloud Data Catalog, including taxonomies and policy tags.
 iam.tf: Configures service accounts and IAM roles for required access permissions.
+
+
 Usage
 Once Terraform has applied the plan and created the necessary resources, you can start interacting with the data catalog, BigQuery datasets, and tables directly in the GCP console.
 
 BigQuery: You can now query and analyze your data stored in the BigQuery tables.
 Data Catalog: The data catalog will help you organize, classify, and apply governance to your data assets.
+
 Potential Issues & Solutions
 Billing Disabled Error:
-
 If you encounter the error BILLING_DISABLED, it means that billing is not enabled for your GCP project. Visit the billing page to enable billing.
+
 API Not Enabled Error:
-
 If you receive a SERVICE_DISABLED error for Data Catalog or BigQuery, you must enable the respective APIs for your project. You can do this by visiting the API library and enabling the required APIs.
+
 Permission Issues:
-
 Ensure your GCP account has sufficient permissions to create and manage the resources. This includes roles like roles/bigquery.admin, roles/datacatalog.admin, and roles/iam.serviceAccountAdmin.
-Terraform Initialization Issues:
 
+Terraform Initialization Issues:
 If Terraform fails to initialize, try running terraform init again. Ensure your internet connection is stable, and that there are no issues with your provider configuration.
+
 License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
